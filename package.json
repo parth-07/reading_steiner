@@ -4,7 +4,7 @@
   "description": "App dedicated to improve performance and efficiency of people by proper measurement and evaluation of their current practices , .....",
   "main": "index.js",
   "scripts": {
-    "start" : "node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,7 +25,8 @@
   "homepage": "https://github.com/parth-07/reading_steiner#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "pg": "^8.2.1"
+    "pg": "^8.2.1",
+    "validator": "^13.1.1"
   },
   "engines": {
     "node": "10.19.0",
