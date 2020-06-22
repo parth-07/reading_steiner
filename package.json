@@ -1,0 +1,34 @@
+{
+  "name": "reading_steiner",
+  "version": "1.0.0",
+  "description": "App dedicated to improve performance and efficiency of people by proper measurement and evaluation of their current practices , .....",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/parth-07/reading_steiner.git"
+  },
+  "keywords": [
+    "steins;gate",
+    "study",
+    "performance",
+    "efficiency"
+  ],
+  "author": "parth vidushi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/parth-07/reading_steiner/issues"
+  },
+  "homepage": "https://github.com/parth-07/reading_steiner#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.2.1"
+  },
+  "engines": {
+    "node": "10.19.0",
+    "npm": "6.14.5"
+  }
+}
