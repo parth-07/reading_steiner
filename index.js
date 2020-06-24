@@ -15,10 +15,13 @@ client.connect();
 
 var app = express();
 
+let query = "SELECT * FROM just_test"
 
 app.get('/',(req,res,next) => {
-    res.send("Hello World");
-    next()
+    client.query(query,(response) => {
+        res.send(response.results);
+        next()
+    });
 });
 
 app.listen(PORT)
