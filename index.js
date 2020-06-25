@@ -1,27 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Client = require('pg').Client;
+const pgClient = require('./db/pgWrapper');
+const userDB = require('./db/userDB')(pgClient);
+const authenticator = require('authenticator')(userDB);
+const authRoutes = require('./auth/authRoutes');
+
 const PORT = process.env.PORT || 3000;
-const validator = require('validator');
-
-var client = new Client({
-    connectionString : process.env.DATABASE_URL,
-    ssl : {
-        rejectUnauthorized : false
-    }
-});
-
-client.connect();
 
 var app = express();
 
-let query = "SELECT * FROM just_test"
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : true}));
 
-app.get('/',(req,res,next) => {
-    client.query(query,(response) => {
-        res.send(response.results);
-        next()
-    });
-});
+let authRouter = authRoutes(express.Router(),authenticator);
+
+app.use('/auth',authRouter);
 
 app.listen(PORT)

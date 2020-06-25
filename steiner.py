@@ -1,7 +1,7 @@
 import numpy as np
 import sys
 from docopt import docopt
-import getpass
+import connection
 
 program_doc = \
 """Reading Steiner 
@@ -22,7 +22,7 @@ arguments = docopt(program_doc, version='Reading Steiner 1.0.0')
 # print(type(arguments))
 # print(arguments)
 
-#Handing login / new user
+#Handing login / register
 username = arguments['<username>'] or arguments['--username']
 password = arguments['<password>'] or arguments['--password']
 isNewUser = False
@@ -32,15 +32,9 @@ if not username :
     isNewUser = (isNewUser == 'y')
 
 if not isNewUser :
-    if not username :
-        username = input("Username : ")
-    if not password :
-        password = getpass.getpass("Password : ")
-    # login(username,password)    
+    connection.login(username,password)    
 else :
-    # createAccount()
+    connection.create_account()
     pass
 
-print(username)
-print(password)
 
