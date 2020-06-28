@@ -2,6 +2,7 @@ import numpy as np
 import sys
 from docopt import docopt
 import connection
+import sketch
 
 program_doc = \
 """Reading Steiner 
@@ -32,7 +33,13 @@ if not username :
     isNewUser = (isNewUser == 'y')
 
 if not isNewUser :
-    connection.login(username,password)    
+    data = connection.login(username,password)
+    # print(data)    
+    if data :
+        sketch.init(data)
+        # print(sketch.session.headers)
+        # print(sketch.session.request.headers)
+        sketch.welcome()
 else :
     connection.create_account()
     pass
