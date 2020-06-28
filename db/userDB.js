@@ -1,6 +1,4 @@
-const { query } = require("express");
-
-let pgClient;
+ let pgClient;
 
 function create_account_db(bioData, cbFunc) {
     console.log("in userDB create_account");
