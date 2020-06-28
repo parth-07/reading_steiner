@@ -1,6 +1,7 @@
 import getpass
 import requests
 import json
+import pandas as pd
 
 BASE = 'http://localhost:3000/'
 
@@ -8,6 +9,14 @@ REGISTER_LINK = BASE + 'auth/register'
 LOGIN_LINK = BASE + 'auth/login'
 PROFILE_LINK = BASE + 'account/profile'
 SIGNOFF_LINK = BASE + 'account/signoff'
+QUESTIONS_LINK = BASE + 'account/getquestions'
+
+def display_error_info(data) :
+    # print(data)
+    print("Error :",data.get('error',None))
+    if 'message' in data :
+        print("Message :",data.get('message',None))
+
 
 def login(username , password) : 
     res = None
@@ -20,14 +29,15 @@ def login(username , password) :
         data = {'username' : username , 'password' : password}
         # print(data)
         r = requests.post(LOGIN_LINK,data = data)
-        res = json.loads(r.content)
-        err = res.get('error',None)
+        temp_res = json.loads(r.content)
+        err = temp_res.get('error',None)
         if err is None :
+            res = temp_res
             print("Login Successful")
             break
         else :
-            display_error_info(res)
-            if res['type'] == 'validation' :
+            display_error_info(temp_res)
+            if temp_res['type'] == 'validation' :
                 go_again = (input("Try again(y/n) : ") == 'y')
                 if not go_again :
                     break
@@ -44,10 +54,6 @@ def logoff(session) :
     return error
     
 
-def display_error_info(data) :
-    # print(data)
-    print("Error :",data.get('error',None))
-    print("Message :",data.get('message',None))
 
 def create_account() :
     bio_properties = ['username','password','email', 'first_name','last_name'] 
@@ -79,6 +85,17 @@ def get_user_information(session) :
     return bio_data
     
     
+def get_performance_questions(session) :
+    data = session.post(QUESTIONS_LINK)
+    data = json.loads(data.content)
+    # print(data)
+    if data.get('err') :
+        display_error_info(data) 
+        return None
+    df = pd.DataFrame(data['questions'])
+    df.set_index('qid')
+    print(df.head())
+    return list(df['question'])
     
 
     
