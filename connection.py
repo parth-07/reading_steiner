@@ -10,6 +10,8 @@ LOGIN_LINK = BASE + 'auth/login'
 PROFILE_LINK = BASE + 'account/profile'
 SIGNOFF_LINK = BASE + 'account/signoff'
 QUESTIONS_LINK = BASE + 'account/getquestions'
+PROGRESS_UPDATED_LINK = BASE + 'account/progressUpdated'
+UPDATE_PROGRESS_LINK = BASE + 'account/updateProgress'
 
 def display_error_info(data) :
     # print(data)
@@ -94,8 +96,16 @@ def get_performance_questions(session) :
         return None
     df = pd.DataFrame(data['questions'])
     df.set_index('qid')
-    print(df.head())
+    # print(df.head())
     return list(df['question'])
     
 
+def get_progress_updated_status(session) : 
+    r = session.post(PROGRESS_UPDATED_LINK)
+    data = json.loads(r.content)
+    if data.get('err') :
+        display_error_info(data)
+        return None
+    return data.get('progress_updated')
+    
     

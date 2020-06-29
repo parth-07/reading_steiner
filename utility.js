@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const validator = require('validator');
 
 function transform_validate_data(data, requiredParams, notRequiredParams, cbFunc = null ) {
     err = null;

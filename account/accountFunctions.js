@@ -57,17 +57,39 @@ function update_progress(req,res,next) {
         err.status_code = 400;
         return next(err);
     }
-    userDB.get_latest_progress_record(data,(err , record) => {
+    userDB.progress_updated_today(data,(err , update_status) => {
         if(err) {
             err.status_code = 500;
             return next(err);
         }
-        if (record) 
-            latest_record = record['progress_date'];
-        else 
-            latest_record = null
-        current = Date.now()
-        res.json({'latest_record' : latest_record , 'current' : current});
+        else if(update_status) {
+            err = new Error("Progress can be updated only once a day");
+            err.status_code = 406 ;
+            return next(err);
+        }
+        else {
+            userDB.update_progress_db(data,(err , res_query) => {
+                if(err) {
+                    err.status_code = 500;
+                    return next(err);
+                }
+                else {
+                    res.status(200).send('Success');
+                }
+            })
+        }
+    })
+}
+
+function progress_updated(req,res,next) {
+    console.log("in progress_updated");
+    data = req.body;
+    userDB.progress_updated_today(data ,(err,update_status) => {
+        if(err) {
+            err.status_code = 500;
+            return next(err);
+        }
+        res.json({ "progress_updated" : update_status});
     })
 }
 
@@ -79,6 +101,7 @@ module.exports = (injectedUserDBClient , injectedTokenDBClient , injectedQuestio
         user_info : user_info,
         log_off : log_off,
         get_questions : get_questions,
-        update_progress : update_progress
+        update_progress : update_progress,
+        progress_updated : progress_updated
     }
 }

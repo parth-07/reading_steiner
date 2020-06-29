@@ -11,7 +11,7 @@ def init(token) :
         session.headers.update(token)
     
 def view_profile() :
-    sensitive_info = ['userid','password']
+    sensitive_info = ['userid','password','account_created']
     bio_data = connection.get_user_information(session)
     if not bio_data :
         return
@@ -26,9 +26,14 @@ def log_off() :
         print(error)
     else :
         print("Successfully logged off")
-    sys.exit(1)
+        sys.exit(1)
+
 
 def update_divergence() : 
+    progress_update_status = connection.get_progress_updated_status(session)
+    if progress_update_status :
+        print("Progress already updated for today")
+        return
     questions = connection.get_performance_questions(session)
     if not questions :
         return
@@ -37,6 +42,7 @@ def update_divergence() :
         ans = input(question + " : ")
         answers.append(ans)
     print(answers) 
+    
 
 profile_functions = {
     1 : view_profile,

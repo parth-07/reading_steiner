@@ -34,7 +34,7 @@ if not username :
 
 if not isNewUser :
     data = connection.login(username,password)
-    print(data)    
+    # print(data)    
     if data :
         sketch.init(data)
         # print(sketch.session.headers)

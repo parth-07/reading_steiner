@@ -11,6 +11,7 @@ let client = new Client({
 client.connect();
 
 function query(queryText, queryValues, cbFunc) {
+    // console.log(queryValues);
     if(queryValues.length) {
         client.query(queryText, queryValues, (err, res) => {
             cbFunc(err, res);

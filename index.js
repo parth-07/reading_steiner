@@ -8,6 +8,8 @@ const authenticator = require('./auth/authenticator')(userDB,tokenDB);
 const accountFunctions = require('./account/accountFunctions')(userDB,tokenDB,questionDB);
 const authRoutes = require('./auth/authRoutes');
 const accountRoutes = require('./account/accountRoutes.js');
+
+
 const PORT = process.env.PORT || 3000;
 
 var app = express();
