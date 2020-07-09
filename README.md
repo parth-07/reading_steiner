@@ -1,9 +1,9 @@
 # reading_steiner
 
-It's an application that takes role of reading steiner for your life. It will show in which worldline you are right now , steins;gate being best possible worldline and gamma the worst one.
+It's an application that takes role of reading steiner for your life. It will show in which worldline you are right now , steins;gate being best possible worldline and gamma the worst one and various other worldlines in between.
 
 Your life can go down very different paths , your today actions dictates which way , more precisely ,which path your life is going. 
-This application is designed to boost performance and efficiency by providing impact of measurement on future and divergence number by everyday's performance .
+This application is designed to boost performance and efficiency by providing impact of measurement on future and divergence number by everyday's performance , efficiency and satisfaction level .
  
 Application will ask few questions daily to assess how the day went and how it will impact divergence number of your life . Divergence number will increase if the day went good and is impacting 
 the future positively otherwise divergence number will decrease .This app goal is to improve and straigthen your life by making you realize how your actions are impacting your future in quantitative
