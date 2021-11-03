@@ -28,7 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.2.1",
     "pug": "^3.0.0",
-    "validator": "^13.1.1"
+    "validator": "^13.7.0"
   },
   "engines": {
     "node": "10.19.0",
